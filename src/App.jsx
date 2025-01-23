@@ -12,7 +12,7 @@ function App() {
   const [colors, setColors] = useState(initialColors);
 
   function handleAddColor(newColor) {
-    setColors([{ id: nanoid(), ...newColor }, ...colors]);
+    setColors([{ id: uid(), ...newColor }, ...colors]);
   }
   // console.log("Find Issue 1");
   return (
