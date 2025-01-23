@@ -4,35 +4,21 @@ import Color from "./Components/Color/Color";
 import "./App.css";
 import ColorForm from "./Components/Color/ColorForm.jsx";
 import { uid } from 'uid';
-import useLocalStorageState from "use-local-storage-state";
-
-
-
 
 function App() {
-  const [colors, setColors] = useLocalStorageState("colors", {
-    defaultValue: initialColors,
-  });
+  const [colors, setColors] = useState(initialColors);
 
   function handleAddColor(newColor) {
-    setColors([{ id: uid(), ...newColor }, ...colors]);
+    setColors([{ id: uid(), ...newColor }, ...colors]);  // Add the new color to the list
   }
-  // console.log("Find Issue 1");
+
   return (
     <>
       <h1>Theme Creator</h1>
-      <ColorForm onSubmitColor={handleAddColor} />
-      {colors.length < 1 && <h4>No colors. Start by adding one!</h4>}
-      {colors.map((color) => {
-        return (
-          <Color
-            key={color.id}
-            color={color}
-            onDelete={handleDeleteColor}
-            onEditColor={handleEditColor}
-          />
-        );
-      })}
+      <ColorForm onSubmit={handleAddColor} />  {/* Pass the handler to the form */}
+      {colors.map((color) => (
+        <Color key={color.id} color={color} />  
+      ))}
     </>
   );
 }
