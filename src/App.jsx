@@ -1,9 +1,10 @@
 import { initialColors } from "./lib/colors";
 import Color from "./Components/Color/Color";
 import "./App.css";
+import { uid } from 'uid';
 
 function App() {
-  console.log("Find Issue 1");
+  // console.log("Find Issue 1");
   return (
     <>
       <h1>Theme Creator</h1>
