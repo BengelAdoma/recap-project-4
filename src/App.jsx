@@ -38,8 +38,8 @@ function App() {
       ) : (
         colors.map((color) => (
           <div key={color.id} className="color-card">
-            <Color color={color} />
-            {deleteId === color.id ? (
+            <Color color={color} handleDeleteColor={handleDeleteColor} confirmDeleteColor={confirmDeleteColor} deleteId={deleteId} cancelDelete={cancelDelete}/>
+            {/* {deleteId === color.id ? (
               <div className="color-card-highlight">
                 <p>Really delete?</p>
                 <button onClick={() => handleDeleteColor(color.id)}>Delete</button>
@@ -52,7 +52,7 @@ function App() {
               >
                 Delete
               </button>
-            )}
+            )} */}
           </div>
         ))
       )}
