@@ -14,7 +14,7 @@ export default function Color({ color,deleteId,handleDeleteColor,confirmDeleteCo
       <p>contrast: {color.contrastText}</p>
       {deleteId === color.id ? (
               <div className="color-card-highlight">
-                <p>Really delete?</p>
+                <p className="color-card-headline">Really delete? </p>
                 <button onClick={() => handleDeleteColor(color.id)}>Delete</button>
                 <button onClick={cancelDelete}>Cancel</button>
               </div>
