@@ -10,7 +10,7 @@ function App() {
   const [deleteId, setDeleteId] = useState(null); // Track the color to confirm deletion
 
   function handleAddColor(newColor) {
-    setColors([{ id: uid(), ...newColor }, ...colors]);
+    setColors([{ id: uid(), ...newColor }, ...colors]); // Add new color at the top of the list
   }
 
   function handleDeleteColor(id) {
@@ -26,6 +26,14 @@ function App() {
     setDeleteId(null); // Cancel the delete action
   }
 
+  function handleUpdateColor(id, updatedColor) {
+    setColors(
+      colors.map((color) =>
+        color.id === id ? { ...color, ...updatedColor } : color
+      )
+    ); // Update the color with the specified id
+  }
+
   return (
     <>
       <h1>Theme Creator</h1>
@@ -38,21 +46,14 @@ function App() {
       ) : (
         colors.map((color) => (
           <div key={color.id} className="color-card">
-            <Color color={color} handleDeleteColor={handleDeleteColor} confirmDeleteColor={confirmDeleteColor} deleteId={deleteId} cancelDelete={cancelDelete}/>
-            {/* {deleteId === color.id ? (
-              <div className="color-card-highlight">
-                <p>Really delete?</p>
-                <button onClick={() => handleDeleteColor(color.id)}>Delete</button>
-                <button onClick={cancelDelete}>Cancel</button>
-              </div>
-            ) : (
-              <button
-                className="delete-button"
-                onClick={() => confirmDeleteColor(color.id)}
-              >
-                Delete
-              </button>
-            )} */}
+            <Color
+              color={color}
+              handleDeleteColor={handleDeleteColor}
+              confirmDeleteColor={confirmDeleteColor}
+              deleteId={deleteId}
+              cancelDelete={cancelDelete}
+              handleUpdateColor={handleUpdateColor} // Pass update handler
+            />
           </div>
         ))
       )}

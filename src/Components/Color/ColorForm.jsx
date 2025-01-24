@@ -1,4 +1,4 @@
-import ColorInput from "./ColorInput";
+import ColorInput from "./ColorInput.jsx";
 import "./Color.css";
 
 export default function ColorForm({
@@ -36,7 +36,7 @@ return(
         <ColorInput id="contrastText" defaultValue={initialData.contrastText} />
       </label>
       <br />
-      <button>Add Color</button>
+      <button>ADD COLOR</button>
     </form>
   );
 }
