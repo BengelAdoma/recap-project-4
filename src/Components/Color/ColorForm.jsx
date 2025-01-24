@@ -1,17 +1,27 @@
-import ColorInput from "../ColorInput/ColorInput";
-import "./ColorForm.css";
+import { useState } from "react";
+import ColorInput from "./ColorInput"; // Assuming ColorInput is a separate component
+import "./Color.css";
 
 export default function ColorForm({
-    onSubmit, initialData = { role: "some color", hex: "#123456", contrastText: "#ffffff" },
+  onSubmit,
+  initialData = { role: "some color", hex: "#123456", contrastText: "#ffffff" },
+}) {
+  // State to track form input values
+  const [role, setRole] = useState(initialData.role);
+  const [hex, setHex] = useState(initialData.hex);
+  const [contrastText, setContrastText] = useState(initialData.contrastText);
 
-}){
-function handleSubmit(e){
-e.preventDefault();
-const formData = new FormData(e.target);
-const data = Object.fromEntries(formData)
-onSubmit(data)
-}
-return(
+  // Handle form submission
+  function handleSubmit(event) {
+    event.preventDefault(); // Prevent page reload
+    const data = { role, hex, contrastText };  // Prepare data to submit
+    onSubmit(data);  // Pass the data to the parent component (App.jsx)
+    setRole("");  // Reset form inputs after submission
+    setHex("");
+    setContrastText("");
+  }
+
+  return (
     <form className="color-form" onSubmit={handleSubmit}>
       <label htmlFor="role">
         Role
@@ -20,23 +30,32 @@ return(
           type="text"
           id="role"
           name="role"
-          defaultValue={initialData.role}
+          value={role}  // Bind to state
+          onChange={(e) => setRole(e.target.value)}  // Update state on change
         />
       </label>
       <br />
       <label htmlFor="hex">
         Hex
         <br />
-        <ColorInput id="hex" defaultValue={initialData.hex} />
+        <ColorInput
+          id="hex"
+          value={hex}  // Bind to state
+          onColorChange={setHex}  // Update state on change
+        />
       </label>
       <br />
       <label htmlFor="contrastText">
         Contrast Text
         <br />
-        <ColorInput id="contrastText" defaultValue={initialData.contrastText} />
+        <ColorInput
+          id="contrastText"
+          value={contrastText}  // Bind to state
+          onColorChange={setContrastText}  // Update state on change
+        />
       </label>
       <br />
-      <button>ADD COLOR</button>
+      <button type="submit">Add Color</button>
     </form>
   );
 }

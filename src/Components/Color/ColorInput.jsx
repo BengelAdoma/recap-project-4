@@ -1,23 +1,22 @@
-
-import { useState } from "react";
-
-export default function ColorInput({ id, defaultValue }) {
-  const [inputValue, setInputValue] = useState(defaultValue);
-
-  function handleInputValue(event) {
-    setInputValue(event.target.value);
-  }
-
+function ColorInput({ id, value, onColorChange }) {
   return (
-    <>
+    <div>
+      {/* Color input field */}
+      <input
+        type="color"
+        id={id}
+        value={value}  // Bind to state
+        onChange={(e) => onColorChange(e.target.value)}  // Update the parent's state
+      />
+      {/* Text input for hex */}
       <input
         type="text"
-        id={id}
-        name={id}
-        value={inputValue}
-        onChange={handleInputValue}
+        value={value}  // Bind to state
+        onChange={(e) => onColorChange(e.target.value)}  // Update the parent's state
+        placeholder="Enter hex value"
       />
-      <input type="color" value={inputValue} onChange={handleInputValue} />
-    </>
+    </div>
   );
 }
+
+export default ColorInput;
